@@ -21,7 +21,7 @@ A React-based network monitoring application that mimics the network panel of Ch
 
 1. **Clone the repository**:
     ```bash
-    git clone [https://github.com/yourusername/network-monitor-app.git](https://github.com/DevnandanRaj/react-network.git)
+    git clone https://github.com/DevnandanRaj/react-network.git
     cd react-network
     ```
 
@@ -36,7 +36,7 @@ A React-based network monitoring application that mimics the network panel of Ch
     ```
 
 4. **Open your browser**:
-    - Visit `[http://localhost:3000](https://sunny-monstera-33c7f9.netlify.app/)` to see the application in action.
+    - Visit `https://sunny-monstera-33c7f9.netlify.app/` to see the application in action.
 
 ## Project Structure
 

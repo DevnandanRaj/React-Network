@@ -4,9 +4,9 @@ import {
   CLEAR_SELECTED_REQUEST,
 } from "./actionTypes";
 
-export const fetchRequestDetails = (requests) => ({
+export const fetchRequestDetails = (requestDetails) => ({
   type: FETCH_REQUEST_DETAILS,
-  payload: requests,
+  payload: requestDetails,
 });
 
 export const setSelectedRequest = (request) => ({

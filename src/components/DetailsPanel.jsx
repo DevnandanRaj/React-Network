@@ -80,17 +80,17 @@ const DetailsPanel = ({ request, onClose }) => {
               <Collapse in={showGeneral}>
                 <Box mt={1}>
                   <Typography variant="body2">
-                    <strong>Request URL:</strong> {request.name}
+                    <strong>Request URL:</strong> {request?.url || "N/A"}
                   </Typography>
                   <Typography variant="body2">
                     <strong>Request Method:</strong>{" "}
-                    {request.response.config.method}
+                    {request?.method || "N/A"}
                   </Typography>
                   <Typography variant="body2">
-                    <strong>Status Code:</strong> {request.status}
+                    <strong>Status Code:</strong> {request?.status || "N/A"}
                   </Typography>
                   <Typography variant="body2">
-                    <strong>Remote Address :</strong> Not Available
+                    <strong>Remote Address:</strong> Not Available
                   </Typography>
                   <Typography variant="body2">
                     <strong>Referrer Policy:</strong> Not Available
@@ -103,7 +103,9 @@ const DetailsPanel = ({ request, onClose }) => {
             <Box mb={2}>
               <Button
                 onClick={() => setShowRequestHeaders((prev) => !prev)}
-                startIcon={showRequestHeaders ? <ExpandLess /> : <ExpandMore />}
+                startIcon={
+                  showRequestHeaders ? <ExpandLess /> : <ExpandMore />
+                }
                 sx={{
                   justifyContent: "flex-start",
                   fontSize: "0.875rem",
@@ -119,7 +121,7 @@ const DetailsPanel = ({ request, onClose }) => {
                     <strong>Request Headers:</strong>
                   </Typography>
                   <pre style={{ fontSize: "0.75rem" }}>
-                    {JSON.stringify(request.requestHeaders, null, 2)}
+                    {JSON.stringify(request?.headers, null, 2) || "N/A"}
                   </pre>
                 </Box>
               </Collapse>
@@ -147,7 +149,7 @@ const DetailsPanel = ({ request, onClose }) => {
                     <strong>Response Headers:</strong>
                   </Typography>
                   <pre style={{ fontSize: "0.75rem" }}>
-                    {JSON.stringify(request.responseHeaders, null, 2)}
+                    {JSON.stringify(request?.responseHeaders, null, 2) || "N/A"}
                   </pre>
                 </Box>
               </Collapse>
@@ -161,7 +163,7 @@ const DetailsPanel = ({ request, onClose }) => {
               Preview
             </Typography>
             <pre style={{ fontSize: "0.75rem" }}>
-              {JSON.stringify(request.payload, null, 2)}
+              {JSON.stringify(request?.payload, null, 2) || "N/A"}
             </pre>
           </Box>
         )}
@@ -172,7 +174,7 @@ const DetailsPanel = ({ request, onClose }) => {
               Response
             </Typography>
             <pre style={{ fontSize: "0.75rem" }}>
-              {JSON.stringify(request.response, null, 2)}
+              {JSON.stringify(request?.response, null, 2) || "N/A"}
             </pre>
           </Box>
         )}
@@ -191,7 +193,9 @@ const DetailsPanel = ({ request, onClose }) => {
             <Typography variant="h6" gutterBottom>
               Timing
             </Typography>
-            <Typography>Request took {request.time} ms to complete.</Typography>
+            <Typography>
+              Request took {request?.time || "N/A"} ms to complete.
+            </Typography>
           </Box>
         )}
       </Box>

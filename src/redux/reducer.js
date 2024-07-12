@@ -1,9 +1,4 @@
-// src/redux/reducer.js
-import {
-  FETCH_REQUEST_DETAILS,
-  SET_SELECTED_REQUEST,
-  CLEAR_SELECTED_REQUEST,
-} from './actionTypes';
+import { FETCH_REQUEST_DETAILS, SET_SELECTED_REQUEST, CLEAR_SELECTED_REQUEST } from './actionTypes';
 
 const initialState = {
   requestDetails: [],
@@ -15,7 +10,7 @@ const networkReducer = (state = initialState, action) => {
     case FETCH_REQUEST_DETAILS:
       return {
         ...state,
-        requestDetails: action.payload,
+        requestDetails: [...state.requestDetails, ...action.payload],
       };
     case SET_SELECTED_REQUEST:
       return {

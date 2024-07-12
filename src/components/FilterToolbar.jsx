@@ -219,6 +219,10 @@ const FilterToolbar = ({ requestTypeArr, onFilterChange }) => {
               padding: "4px 8px",
               minWidth: "200px",
               marginRight: "8px",
+              color: grey[800],  
+              "& input::placeholder": {
+                color: grey[600],
+              },
             }}
           />
           <Box display="flex" alignItems="center">
@@ -247,7 +251,15 @@ const FilterToolbar = ({ requestTypeArr, onFilterChange }) => {
             <Button
               key={ele.value}
               variant={ele.value === selectedType ? "contained" : "outlined"}
-              sx={{ margin: "4px" }}
+              sx={{
+                margin: "4px",
+                color: grey[800],
+                borderColor: grey[400],
+                borderRadius: "10px",
+                "&.Mui-selected": {
+                  backgroundColor: ele.value === selectedType ? "LightCyan" : "inherit",
+                },
+              }}
               onClick={() => handleFilterClick(ele.value)}
             >
               {ele.heading}

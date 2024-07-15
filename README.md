@@ -2,6 +2,8 @@
 
 A React-based network monitoring application that mimics the network panel of Chrome DevTools. This application captures and displays network requests, including their headers, payload, response, initiator, and timing.
 
+## Demo video link -> https://drive.google.com/file/d/1Fyz9dBhf5EtEr5noWAbfSVX_Y5Xg0Q0x/view?usp=sharing
+
 ## Features
 
 - **Request Monitoring**: Captures all network requests made by the application.

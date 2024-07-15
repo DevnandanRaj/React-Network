@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   AppBar,
   Toolbar,
@@ -22,10 +22,13 @@ import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import { grey, red } from "@mui/material/colors";
 import download from "../assets/download.png";
 import upload from "../assets/upload.png";
+import { ThemeContext } from "../Theme/ThemeContext"; 
 
 const FilterToolbar = ({ requestTypeArr, onFilterChange }) => {
   const [isRecording, setIsRecording] = useState(false);
   const [selectedType, setSelectedType] = useState("all");
+  const { darkMode } = useContext(ThemeContext);
+
 
   const handleRecordToggle = () => {
     setIsRecording((prev) => !prev);
@@ -52,7 +55,7 @@ const FilterToolbar = ({ requestTypeArr, onFilterChange }) => {
             edge="start"
             aria-label="record"
             onClick={handleRecordToggle}
-            sx={{ color: grey[800] }}
+            sx={{ color: darkMode ? "#fff" : grey[800] }}
           >
             {isRecording ? (
               <Stop />
@@ -65,7 +68,7 @@ const FilterToolbar = ({ requestTypeArr, onFilterChange }) => {
             <IconButton
               edge="start"
               aria-label="clear log"
-              sx={{ color: grey[800] }}
+              sx={{ color: darkMode ? "#fff" : grey[800] }}
             >
               <Cancel />
             </IconButton>
@@ -93,7 +96,7 @@ const FilterToolbar = ({ requestTypeArr, onFilterChange }) => {
             <IconButton
               edge="start"
               aria-label="search"
-              sx={{ color: grey[800] }}
+              sx={{ color: darkMode ? "#fff" : grey[800] }}
             >
               <Search />
             </IconButton>
@@ -108,20 +111,20 @@ const FilterToolbar = ({ requestTypeArr, onFilterChange }) => {
           />
 
           <Box display="flex" alignItems="center">
-            <Checkbox />
+            <Checkbox sx={{ color: darkMode ? "#fff" : grey[800] }} />
             <Typography
               variant="body2"
-              sx={{ marginLeft: "4px", color: grey[800] }}
+              sx={{ marginLeft: "4px", color: darkMode ? "#fff" : grey[800] }}
             >
               Preserve Log
             </Typography>
           </Box>
 
           <Box display="flex" alignItems="center">
-            <Checkbox />
+            <Checkbox sx={{ color: darkMode ? "#fff" : grey[800] }} />
             <Typography
               variant="body2"
-              sx={{ marginLeft: "4px", color: grey[800] }}
+              sx={{ marginLeft: "4px", color: darkMode ? "#fff" : grey[800] }}
             >
               Disable Cache
             </Typography>
@@ -132,7 +135,7 @@ const FilterToolbar = ({ requestTypeArr, onFilterChange }) => {
             sx={{
               textTransform: "none",
               borderColor: grey[400],
-              color: grey[800],
+              color: darkMode ? "#fff" : grey[800],
             }}
           >
             No Throttling
@@ -143,7 +146,7 @@ const FilterToolbar = ({ requestTypeArr, onFilterChange }) => {
               <IconButton
                 edge="start"
                 aria-label="more network conditions..."
-                sx={{ color: grey[800] }}
+                sx={{ color: darkMode ? "#fff" : grey[800] }}
               >
                 <SignalWifi4Bar />
               </IconButton>
@@ -162,7 +165,7 @@ const FilterToolbar = ({ requestTypeArr, onFilterChange }) => {
             <IconButton
               edge="start"
               aria-label="import har"
-              sx={{ color: grey[800] }}
+              sx={{ color: darkMode ? "#fff" : grey[800] }}
             >
               <img
                 src={upload}
@@ -176,7 +179,7 @@ const FilterToolbar = ({ requestTypeArr, onFilterChange }) => {
             <IconButton
               edge="start"
               aria-label="export har"
-              sx={{ color: grey[800] }}
+              sx={{ color: darkMode ? "#fff" : grey[800] }}
             >
               <img
                 src={download}
@@ -198,7 +201,7 @@ const FilterToolbar = ({ requestTypeArr, onFilterChange }) => {
             <IconButton
               edge="start"
               aria-label="network settings"
-              sx={{ color: grey[800], ml: "auto" }}
+              sx={{ color: darkMode ? "#fff" : grey[800], ml: "auto" }}
             >
               <Settings />
             </IconButton>
@@ -207,42 +210,57 @@ const FilterToolbar = ({ requestTypeArr, onFilterChange }) => {
       </AppBar>
 
       {/* Filter Toolbar */}
-      <Box sx={{ padding: "8px", borderBottom: `1px solid ${grey[300]}` }}>
+      <Box
+        sx={{
+          padding: "8px",
+          borderBottom: `1px solid ${grey[300]}`,
+          display: "flex",
+          alignItems: "center",
+          flexWrap: "wrap",
+          gap: 1,
+        }}
+      >
         {/* Filter Input and Checkboxes */}
-        <Box display="flex" alignItems="center" mb={2} flexWrap="wrap" gap={1}>
-          <InputBase
-            placeholder="Filter"
-            sx={{
-              flexGrow: 1,
-              border: `1px solid ${grey[400]}`,
-              borderRadius: "4px",
-              padding: "4px 8px",
-              minWidth: "200px",
-              marginRight: "8px",
-              color: grey[800],  
-              "& input::placeholder": {
-                color: grey[600],
-              },
-            }}
-          />
-          <Box display="flex" alignItems="center">
-            <Checkbox />
-            <Typography variant="body2" sx={{ marginLeft: "4px" }}>
-              Invert
-            </Typography>
-          </Box>
-          <Box display="flex" alignItems="center">
-            <Checkbox />
-            <Typography variant="body2" sx={{ marginLeft: "4px" }}>
-              Hide data URLs
-            </Typography>
-          </Box>
-          <Box display="flex" alignItems="center">
-            <Checkbox />
-            <Typography variant="body2" sx={{ marginLeft: "4px" }}>
-              Hide extension URLs
-            </Typography>
-          </Box>
+        <InputBase
+          placeholder="Filter"
+          sx={{
+            flexGrow: 1,
+            border: `1px solid ${grey[400]}`,
+            borderRadius: "4px",
+            padding: "4px 8px",
+            minWidth: "150px",
+            color: darkMode ? "#fff" : grey[800],
+            "& input::placeholder": {
+              color: darkMode ? grey[400] : grey[600],
+            },
+          }}
+        />
+        <Box display="flex" alignItems="center">
+          <Checkbox sx={{ color: darkMode ? "#fff" : grey[800] }} />
+          <Typography
+            variant="body2"
+            sx={{ marginLeft: "4px", color: darkMode ? "#fff" : grey[800] }}
+          >
+            Invert
+          </Typography>
+        </Box>
+        <Box display="flex" alignItems="center">
+          <Checkbox sx={{ color: darkMode ? "#fff" : grey[800] }} />
+          <Typography
+            variant="body2"
+            sx={{ marginLeft: "4px", color: darkMode ? "#fff" : grey[800] }}
+          >
+            Hide data URLs
+          </Typography>
+        </Box>
+        <Box display="flex" alignItems="center">
+          <Checkbox sx={{ color: darkMode ? "#fff" : grey[800] }} />
+          <Typography
+            variant="body2"
+            sx={{ marginLeft: "4px", color: darkMode ? "#fff" : grey[800] }}
+          >
+            Hide extension URLs
+          </Typography>
         </Box>
 
         {/* Request Type Buttons */}
@@ -253,7 +271,7 @@ const FilterToolbar = ({ requestTypeArr, onFilterChange }) => {
               variant={ele.value === selectedType ? "contained" : "outlined"}
               sx={{
                 margin: "4px",
-                color: grey[800],
+                color: darkMode ? "#fff" : grey[800],
                 borderColor: grey[400],
                 borderRadius: "10px",
                 "&.Mui-selected": {

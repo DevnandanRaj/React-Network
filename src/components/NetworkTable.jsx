@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   Table,
   TableBody,
@@ -7,10 +7,14 @@ import {
   TableHead,
   TableRow,
   Paper,
+  useTheme
 } from '@mui/material';
+import { ThemeContext } from "../Theme/ThemeContext"; 
 
 const NetworkTable = ({ requestDetails, onRequestSelect }) => {
   const [selectedRow, setSelectedRow] = useState(null);
+  const { darkMode } = useContext(ThemeContext);
+  const theme = useTheme();
 
   const handleRowClick = (ele, index) => {
     setSelectedRow(index);
@@ -23,13 +27,13 @@ const NetworkTable = ({ requestDetails, onRequestSelect }) => {
     <TableContainer component={Paper} sx={{ height: 'calc(100vh - 120px)', overflow: 'auto' }}>
       <Table stickyHeader>
         <TableHead>
-          <TableRow sx={{ backgroundColor: 'lightgrey' }}>
-            <TableCell sx={{ borderTop: '1px solid PaleTurquoise', borderBottom: '1px solid PaleTurquoise' }}>Name</TableCell>
-            <TableCell sx={{ borderTop: '1px solid PaleTurquoise', borderBottom: '1px solid PaleTurquoise' }}>Status</TableCell>
-            <TableCell sx={{ borderTop: '1px solid PaleTurquoise', borderBottom: '1px solid PaleTurquoise' }}>Type</TableCell>
-            <TableCell sx={{ borderTop: '1px solid PaleTurquoise', borderBottom: '1px solid PaleTurquoise' }}>Initiator</TableCell>
-            <TableCell sx={{ borderTop: '1px solid PaleTurquoise', borderBottom: '1px solid PaleTurquoise' }}>Size</TableCell>
-            <TableCell sx={{ borderTop: '1px solid PaleTurquoise', borderBottom: '1px solid PaleTurquoise' }}>Time</TableCell>
+          <TableRow sx={{ backgroundColor: darkMode ? 'darkgrey' : 'lightgrey' }}>
+            <TableCell sx={{ borderTop: `1px solid ${theme.palette.divider}`, borderBottom: `1px solid ${theme.palette.divider}` }}>Name</TableCell>
+            <TableCell sx={{ borderTop: `1px solid ${theme.palette.divider}`, borderBottom: `1px solid ${theme.palette.divider}` }}>Status</TableCell>
+            <TableCell sx={{ borderTop: `1px solid ${theme.palette.divider}`, borderBottom: `1px solid ${theme.palette.divider}` }}>Type</TableCell>
+            <TableCell sx={{ borderTop: `1px solid ${theme.palette.divider}`, borderBottom: `1px solid ${theme.palette.divider}` }}>Initiator</TableCell>
+            <TableCell sx={{ borderTop: `1px solid ${theme.palette.divider}`, borderBottom: `1px solid ${theme.palette.divider}` }}>Size</TableCell>
+            <TableCell sx={{ borderTop: `1px solid ${theme.palette.divider}`, borderBottom: `1px solid ${theme.palette.divider}` }}>Time</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -39,19 +43,21 @@ const NetworkTable = ({ requestDetails, onRequestSelect }) => {
               hover
               onClick={() => handleRowClick(ele, index)}
               sx={{
-                backgroundColor: selectedRow === index ? 'LightCyan' : index % 2 === 0 ? 'Gainsboro' : 'white',
+                backgroundColor: selectedRow === index 
+                  ? (darkMode ? 'LightSlateGray' : 'LightCyan') 
+                  : (index % 2 === 0 ? (darkMode ? 'darkgrey' : 'Gainsboro') : (darkMode ? 'black' : 'white')),
                 color: selectedRow === index ? 'white' : 'inherit',
                 '&:hover': {
                   cursor: 'pointer',
                 },
               }}
             >
-              <TableCell sx={{ borderLeft: '1px solid PaleTurquoise', borderRight: '1px solid PaleTurquoise' }}>{ele.url}</TableCell>
-              <TableCell sx={{ borderLeft: '1px solid PaleTurquoise', borderRight: '1px solid PaleTurquoise' }}>{ele.status}</TableCell>
-              <TableCell sx={{ borderLeft: '1px solid PaleTurquoise', borderRight: '1px solid PaleTurquoise' }}>{ele.type}</TableCell>
-              <TableCell sx={{ borderLeft: '1px solid PaleTurquoise', borderRight: '1px solid PaleTurquoise' }}>{ele.initiator}</TableCell>
-              <TableCell sx={{ borderLeft: '1px solid PaleTurquoise', borderRight: '1px solid PaleTurquoise' }}>{isNaN(ele.size) ? 'N/A' : `${Math.round(ele.size / 1024)} Kb`}</TableCell>
-              <TableCell sx={{ borderLeft: '1px solid PaleTurquoise', borderRight: '1px solid PaleTurquoise' }}>{isNaN(ele.time) ? 'N/A' : `${ele.time} ms`}</TableCell>
+              <TableCell sx={{ borderLeft: `1px solid ${theme.palette.divider}`, borderRight: `1px solid ${theme.palette.divider}` }}>{ele.url}</TableCell>
+              <TableCell sx={{ borderLeft: `1px solid ${theme.palette.divider}`, borderRight: `1px solid ${theme.palette.divider}` }}>{ele.status}</TableCell>
+              <TableCell sx={{ borderLeft: `1px solid ${theme.palette.divider}`, borderRight: `1px solid ${theme.palette.divider}` }}>{ele.type}</TableCell>
+              <TableCell sx={{ borderLeft: `1px solid ${theme.palette.divider}`, borderRight: `1px solid ${theme.palette.divider}` }}>{ele.initiator}</TableCell>
+              <TableCell sx={{ borderLeft: `1px solid ${theme.palette.divider}`, borderRight: `1px solid ${theme.palette.divider}` }}>{isNaN(ele.size) ? 'N/A' : `${Math.round(ele.size / 1024)} Kb`}</TableCell>
+              <TableCell sx={{ borderLeft: `1px solid ${theme.palette.divider}`, borderRight: `1px solid ${theme.palette.divider}` }}>{isNaN(ele.time) ? 'N/A' : `${ele.time} ms`}</TableCell>
             </TableRow>
           ))}
         </TableBody>

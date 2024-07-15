@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   Box,
   IconButton,
@@ -9,12 +9,15 @@ import {
   Collapse,
 } from "@mui/material";
 import { Close, ExpandMore, ExpandLess } from "@mui/icons-material";
+import { ThemeContext } from "../Theme/ThemeContext"; 
 
 const DetailsPanel = ({ request, onClose }) => {
   const [selectedTab, setSelectedTab] = useState("Headers");
   const [showGeneral, setShowGeneral] = useState(true);
   const [showRequestHeaders, setShowRequestHeaders] = useState(true);
   const [showResponseHeaders, setShowResponseHeaders] = useState(true);
+ 
+  const { darkMode } = useContext(ThemeContext); 
 
   const handleTabChange = (event, newTab) => {
     setSelectedTab(newTab);
@@ -23,18 +26,19 @@ const DetailsPanel = ({ request, onClose }) => {
   return (
     <Box
       width="400px"
-      bgcolor="#f5f5f5"
+      bgcolor={darkMode ? "#333" : "#f5f5f5"} 
       p={2}
       borderLeft="1px solid #ccc"
       display="flex"
       flexDirection="column"
+      color={darkMode ? "#fff" : "inherit"} 
     >
       {/* Tabs and Close Button */}
       <Box
         display="flex"
         alignItems="center"
         mb={2}
-        borderBottom="1px solid #ddd"
+        borderBottom={`1px solid ${darkMode ? "#555" : "#ddd"}`} 
       >
         <IconButton
           edge="start"
